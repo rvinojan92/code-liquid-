@@ -1,0 +1,206 @@
+<style>
+  .hm-section {
+    background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+  .hm-inner {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    gap: 24px;
+    min-height: 520px;
+  }
+  .hm-content {
+    flex: 0 0 55%;
+    max-width: 55%;
+    position: relative;
+    z-index: 2;
+  }
+  .hm-trustpilot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .hm-stars {
+    display: flex;
+    gap: 3px;
+  }
+  .hm-tp-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+  }
+  .hm-title {
+    font-size: clamp(26px, 4vw, 46px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111;
+    margin: 0 0 16px;
+    letter-spacing: -0.5px;
+  }
+  .hm-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0 0 20px;
+    max-width: 420px;
+  }
+  .hm-list {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hm-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #222;
+  }
+  .hm-cta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: #1b3a2f;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    min-width: 260px;
+    transition: background 0.2s ease, transform 0.15s ease;
+    cursor: pointer;
+  }
+  .hm-cta:hover {
+    background: #14291f;
+    transform: translateY(-1px);
+  }
+  .hm-cta-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #fff;
+  }
+  .hm-cta-sub {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.85;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .hm-img-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-self: stretch;
+    overflow: hidden;
+  }
+  .hm-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 560px;
+    object-fit: cover;
+    object-position: top center;
+  }
+  @media (max-width: 767px) {
+    .hm-inner {
+      flex-direction: column-reverse;
+      padding: 0 0 32px;
+      min-height: auto;
+      gap: 0;
+    }
+    .hm-content {
+      flex: none;
+      max-width: 100%;
+      padding: 24px 20px 0;
+    }
+    .hm-img-wrapper {
+      width: 100%;
+      max-height: 260px;
+    }
+    .hm-img {
+      max-height: 260px;
+      object-position: center 15%;
+    }
+    .hm-cta {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+</style>
+
+<div class="hm-section">
+  <div class="hm-inner">
+
+    <div class="hm-content">
+
+      <!-- Trustpilot -->
+      <div class="hm-trustpilot">
+        <div class="hm-stars">
+          {% for i in (1..5) %}
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="18" height="18" rx="2" fill="#00B67A"/>
+              <path d="M9 3.5L10.545 7.205L14.5 7.527L11.525 10.095L12.477 14L9 11.9L5.523 14L6.475 10.095L3.5 7.527L7.455 7.205L9 3.5Z" fill="white"/>
+            </svg>
+          {% endfor %}
+        </div>
+        <span class="hm-tp-text">11 000 avis 5 étoiles</span>
+      </div>
+
+      <!-- Titre -->
+      <h1 class="hm-title">Soulagement de la migraine en 15 minutes&nbsp;— sans médicaments</h1>
+
+      <!-- Description -->
+      <p class="hm-desc">Six airbags. Pression calibrée. Directement sur les voies nerveuses où se développent les migraines.</p>
+
+      <!-- Checklist -->
+      <ul class="hm-list">
+        {% assign checklist_items = "Aucun médicament|Ciblage précis des nerfs|Résultats en 15 minutes" | split: "|" %}
+        {% for item in checklist_items %}
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3.5 9.5L7 13L14.5 5" stroke="#00B67A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>{{ item }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- CTA -->
+      <a href="/products/" class="hm-cta">
+        <span class="hm-cta-main">
+          Essayez Calmare dès maintenant !
+          <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3.75 9H14.25M14.25 9L9.75 4.5M14.25 9L9.75 13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="hm-cta-sub">100 jours sans risque et retour gratuit.</span>
+      </a>
+
+    </div>
+
+    <!-- Image -->
+    <div class="hm-img-wrapper">
+      <img
+        src="REMPLACE_PAR_URL_IMAGE"
+        alt="Femme tenant le dispositif Calmare"
+        class="hm-img"
+        loading="eager"
+      />
+    </div>
+
+  </div>
+</div>
