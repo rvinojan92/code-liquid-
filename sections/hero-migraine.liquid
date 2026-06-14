@@ -1,0 +1,365 @@
+{% comment %}
+  Hero Section - Soulagement migraine
+  Compatible Shopify 2.0 - Section personnalisable via éditeur de thème
+{% endcomment %}
+
+<section class="hero-migraine" id="hero-migraine-{{ section.id }}">
+  <div class="hero-migraine__inner">
+
+    <div class="hero-migraine__content">
+
+      {%- if section.settings.show_trustpilot -%}
+        <div class="hero-migraine__trustpilot">
+          <div class="hero-migraine__stars" aria-label="5 étoiles sur 5">
+            {%- for i in (1..5) -%}
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="18" height="18" rx="2" fill="#00B67A"/>
+                <path d="M9 3.5L10.545 7.205L14.5 7.527L11.525 10.095L12.477 14L9 11.9L5.523 14L6.475 10.095L3.5 7.527L7.455 7.205L9 3.5Z" fill="white"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="hero-migraine__trustpilot-text">{{ section.settings.trustpilot_text }}</span>
+        </div>
+      {%- endif -%}
+
+      <h1 class="hero-migraine__title">{{ section.settings.title }}</h1>
+
+      {%- if section.settings.description != blank -%}
+        <p class="hero-migraine__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.checklist != blank -%}
+        <ul class="hero-migraine__checklist" role="list">
+          {%- assign items = section.settings.checklist | newline_to_br | split: '<br />' -%}
+          {%- for item in items -%}
+            {%- assign item_clean = item | strip -%}
+            {%- if item_clean != blank -%}
+              <li class="hero-migraine__checklist-item">
+                <svg class="hero-migraine__check-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M3.5 9.5L7 13L14.5 5" stroke="#00B67A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>{{ item_clean }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <div class="hero-migraine__cta-wrapper">
+          <a
+            href="{{ section.settings.button_url }}"
+            class="hero-migraine__cta"
+            {% if section.settings.button_url == blank %}aria-disabled="true"{% endif %}
+          >
+            <span class="hero-migraine__cta-main">
+              {{ section.settings.button_label }}
+              <svg class="hero-migraine__cta-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3.75 9H14.25M14.25 9L9.75 4.5M14.25 9L9.75 13.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            {%- if section.settings.button_subtext != blank -%}
+              <span class="hero-migraine__cta-sub">{{ section.settings.button_subtext }}</span>
+            {%- endif -%}
+          </a>
+        </div>
+      {%- endif -%}
+
+    </div>
+
+    {%- if section.settings.image != blank -%}
+      <div class="hero-migraine__image-wrapper">
+        {{
+          section.settings.image
+          | image_url: width: 600
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            class: 'hero-migraine__image',
+            alt: section.settings.image.alt | default: section.settings.title,
+            widths: '300, 400, 500, 600',
+            sizes: '(max-width: 767px) 100vw, 50vw'
+        }}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .hero-migraine {
+    background-color: #ffffff;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  }
+
+  .hero-migraine__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 520px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    gap: 24px;
+  }
+
+  /* ---- CONTENT ---- */
+  .hero-migraine__content {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 55%;
+    max-width: 55%;
+  }
+
+  /* ---- TRUSTPILOT ---- */
+  .hero-migraine__trustpilot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .hero-migraine__stars {
+    display: flex;
+    gap: 3px;
+  }
+
+  .hero-migraine__trustpilot-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444444;
+  }
+
+  /* ---- TITLE ---- */
+  .hero-migraine__title {
+    font-size: clamp(28px, 4.5vw, 48px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111111;
+    margin: 0 0 16px;
+    letter-spacing: -0.5px;
+  }
+
+  /* ---- DESCRIPTION ---- */
+  .hero-migraine__description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555555;
+    margin: 0 0 20px;
+    max-width: 420px;
+  }
+
+  /* ---- CHECKLIST ---- */
+  .hero-migraine__checklist {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-migraine__checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #222222;
+  }
+
+  .hero-migraine__check-icon {
+    flex-shrink: 0;
+  }
+
+  /* ---- CTA ---- */
+  .hero-migraine__cta-wrapper {
+    display: inline-block;
+  }
+
+  .hero-migraine__cta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background-color: #1b3a2f;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    min-width: 260px;
+  }
+
+  .hero-migraine__cta:hover {
+    background-color: #14291f;
+    transform: translateY(-1px);
+  }
+
+  .hero-migraine__cta:active {
+    transform: translateY(0);
+  }
+
+  .hero-migraine__cta-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .hero-migraine__cta-arrow {
+    flex-shrink: 0;
+  }
+
+  .hero-migraine__cta-sub {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+
+  /* ---- IMAGE ---- */
+  .hero-migraine__image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-self: stretch;
+    overflow: hidden;
+  }
+
+  .hero-migraine__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 560px;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 767px) {
+    .hero-migraine__inner {
+      flex-direction: column-reverse;
+      padding: 0 0 32px;
+      min-height: auto;
+      gap: 0;
+    }
+
+    .hero-migraine__content {
+      flex: none;
+      max-width: 100%;
+      padding: 24px 20px 0;
+    }
+
+    .hero-migraine__title {
+      font-size: clamp(26px, 7vw, 34px);
+    }
+
+    .hero-migraine__image-wrapper {
+      width: 100%;
+      max-height: 280px;
+    }
+
+    .hero-migraine__image {
+      max-height: 280px;
+      object-position: center 15%;
+    }
+
+    .hero-migraine__cta {
+      width: 100%;
+      min-width: auto;
+    }
+
+    .hero-migraine__cta-main {
+      font-size: 15px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero Migraine",
+  "tag": "section",
+  "class": "section-hero-migraine",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Trustpilot"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trustpilot",
+      "label": "Afficher le badge Trustpilot",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trustpilot_text",
+      "label": "Texte Trustpilot",
+      "default": "11 000 avis 5 étoiles"
+    },
+    {
+      "type": "header",
+      "content": "Contenu"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre principal",
+      "default": "Soulagement de la migraine en 15 minutes – sans médicaments"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Six airbags. Pression calibrée. Directement sur les voies nerveuses où se développent les migraines."
+    },
+    {
+      "type": "textarea",
+      "id": "checklist",
+      "label": "Points clés (un par ligne)",
+      "default": "Aucun médicament\nCiblage précis des nerfs\nRésultats en 15 minutes"
+    },
+    {
+      "type": "header",
+      "content": "Bouton CTA"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texte du bouton",
+      "default": "Essayez Calmare dès maintenant !"
+    },
+    {
+      "type": "text",
+      "id": "button_subtext",
+      "label": "Sous-texte du bouton",
+      "default": "100 jours sans risque et retour gratuit."
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (femme / produit)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Migraine",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}
